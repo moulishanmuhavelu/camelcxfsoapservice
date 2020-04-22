@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetailResponse"
+	targetNamespace="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetailResponse"
+	elementFormDefault="unqualified">
+
+	<element name="GetEmployeeDetailResponse" type="tns:GetEmployeeDetailResponse" />
+	<complexType name="GetEmployeeDetailResponse">
+		<sequence>
+			<element name="Body" type="tns:Body" />
+		</sequence>
+	</complexType>
+	<complexType name="Body">
+		<sequence>
+			<element name="EmployeeName" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="EmployeeID" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="EmployeeEmail" minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://cxf.apache.org/configuration/beans"
+  xmlns:camel="http://cxf.apache.org/transports/camel" xmlns:cxf="http://camel.apache.org/schema/cxf"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://cxf.apache.org/configuration/beans http://cxf.apache.org/schemas/configuration/cxf-beans.xsd
+    http://cxf.apache.org/transports/camel http://cxf.apache.org/transports/camel.xsd
+    http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- HTTP Endpoint -->
+
+  <cxf:cxfEndpoint id="cXFGetEmployeeDetailHttp"
+    address="/EmployeeDetailService/GetEmployeeDetail"
+    loggingFeatureEnabled="false" endpointName="a:GetEmployeeDetailSOAPPort"
+    wsdlURL="META-INF/wsdl/EmployeeService/GetEmployeeDetailService/GetEmployeeDetail.wsdl"
+    serviceName="a:EmployeeDetailService"
+    serviceClass="com.sample.company.employeeservice.getemployeedetailservice.getemployeedetail.GetEmployeeDetailPortType"
+    xmlns:a="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetail/">
+    <cxf:properties>
+      <entry key="schema-validation-enabled" value="${schema.validation.enabled}" />
+    </cxf:properties>
+    <cxf:inInterceptors>
+      <ref bean="ecsLoggingInInterceptor" />
+    </cxf:inInterceptors>
+    <cxf:outInterceptors>
+      <ref bean="ecsLoggingOutInterceptor" />
+    </cxf:outInterceptors>
+  </cxf:cxfEndpoint>
+
+  <cxf:cxfEndpoint id="cXFGetEmployeeDetailWmq0"
+    address="jms://"
+    endpointName="a:GetEmployeeDetailSOAPPort"
+    wsdlURL="META-INF/wsdl/EmployeeService/GetEmployeeDetailService/GetEmployeeDetail.wsdl"
+    serviceName="a:EmployeeDetailService"
+    serviceClass="com.sample.company.employeeservice.getemployeedetailservice.getemployeedetail.GetEmployeeDetailPortType"
+    xmlns:a="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetail/"
+    loggingFeatureEnabled="false">
+    <cxf:features> 
+       <bean name="getEmployeeDetailJMSConfigFeature0" class="org.apache.cxf.transport.jms.JMSConfigFeature"
+         p:jmsConfig-ref="getEmployeeDetailJMSConfig" />
+    </cxf:features>
+    <cxf:properties>
+      <entry key="schema-validation-enabled" value="${schema.validation.enabled}" />
+    </cxf:properties>
+    <cxf:inInterceptors>
+      <ref bean="ecsLoggingInInterceptor" />
+    </cxf:inInterceptors>
+    <cxf:outInterceptors>
+      <ref bean="ecsLoggingOutInterceptor" />
+    </cxf:outInterceptors>
+  </cxf:cxfEndpoint>
+  
+  <bean id="getEmployeeDetailJMSConfig" class="org.apache.cxf.transport.jms.JMSConfiguration" 
+    p:sessionTransacted="false" p:connectionFactory-ref="jmsConnectionFactory0" p:concurrentConsumers="${wmq.getEmployeeDetail.concurrentconsumers}"
+    p:targetDestination="${queues.getEmployeeDetail}" p:deliveryMode="1" p:timeToLive="${message.timeToLive}" p:explicitQosEnabled="${message.explicitQosEnabled}"/>
+
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetailRequest" targetNamespace="http://com/sample/company/employeeservice/getemployeedetailservice/GetEmployeeDetailRequest" elementFormDefault="unqualified">
+	<element name="GetEmployeeDetailRequest" type="tns:GetEmployeeDetailRequest"/>
+	<!-- Service content -->
+	<complexType name="GetEmployeeDetailRequest">
+		<sequence>
+			<element name="Body" type="tns:Body" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<!-- Service specific content and documentation -->
+	<complexType name="Body">
+		<sequence>
+			<element name="EmployeeID" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

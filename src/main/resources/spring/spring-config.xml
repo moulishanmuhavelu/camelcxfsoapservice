@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://cxf.apache.org/configuration/beans"
+  xmlns:camel="http://cxf.apache.org/transports/camel" xmlns:cxf="http://camel.apache.org/schema/cxf"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/configuration/beans http://cxf.apache.org/schemas/configuration/cxf-beans.xsd
+		http://cxf.apache.org/transports/camel http://cxf.apache.org/transports/camel.xsd
+		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+  <import resource="endpoints/*.xml" />
+  <!-- Spring configuration for JMS -->
+  <!-- -->
+  <bean id="jmsTransactionManager0"
+    class="org.springframework.jms.connection.JmsTransactionManager">
+    <property name="connectionFactory" ref="jmsConnectionFactory0" />
+  </bean>
+
+  <bean id="jmsConnectionFactory0"
+    class="org.springframework.jms.connection.CachingConnectionFactory">
+    <property name="targetConnectionFactory" ref="jmsWmqConnectionFactory0"></property>
+    <property name="reconnectOnException" value="true"></property>
+    <property name="sessionCacheSize" value="${wmq.sessionCacheSize}"></property>
+  </bean>
+
+  <!-- JMS WMQ Configuration -->
+  <bean id="jmsWmqConnectionFactory0" primary="true"
+    class="com.ibm.mq.jms.MQConnectionFactory">
+    <property name="hostName" value="${wmq.config[0].hostName}" />
+    <property name="port" value="${wmq.config[0].port}" />
+    <property name="queueManager" value="${wmq.config[0].queueManager}" />
+    <property name="channel" value="${wmq.config[0].channel}" />
+    <property name="transportType"
+      value="#{T(com.ibm.msg.client.wmq.WMQConstants).WMQ_CM_CLIENT}" />
+    <property name="SSLCipherSuite" value="${wmq.config[0].SSLCipherSuite}" />
+  </bean>
+
+  <bean class="org.apache.camel.component.cxf.transport.CamelTransportFactory">
+    <property name="bus" ref="cxf" />
+    <property name="transportIds">
+      <list>
+        <value>http://cxf.apache.org/transports/camel</value>
+      </list>
+    </property>
+    <property name="checkException" value="true"></property>
+  </bean>
+
+</beans>
