@@ -1,2 +1,1 @@
 camel.springboot.name: camelContext
-services.getfraudscorepayment.scoringapicall.enabled: true

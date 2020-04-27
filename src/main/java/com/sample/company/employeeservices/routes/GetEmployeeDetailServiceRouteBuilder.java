@@ -29,7 +29,7 @@ public class GetEmployeeDetailServiceRouteBuilder extends EmployeeServicesGeneri
     }
 
     /**
-     * Method to configure GetFraudScorePayment HTTP and JMS routes
+     * Method to configure GetEmployeeDetail HTTP and JMS routes
      */
     private void configureGetEmployeeDetailPaymentRoute() {
         final String getEmployeeDetailProcessor = "getEmployeeDetailProcessor";
@@ -37,7 +37,7 @@ public class GetEmployeeDetailServiceRouteBuilder extends EmployeeServicesGeneri
         // RouteBuilder Configurations for GetEmployeeDetailHttp
         if (getEmployeeDetailHttpEnabled) {
             from("cxf:bean:cXFGetEmployeeDetailHttp")
-                    .id("httpFraudScorePaymentRoute").to(getEmployeeDetailProcessor);
+                    .id("httpGetEmployeeDetailRoute").to(getEmployeeDetailProcessor);
         }
 
         // RouteBuilder Configurations for GetEmployeeDetailJms

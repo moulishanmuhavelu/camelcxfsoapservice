@@ -7,8 +7,8 @@
     http://cxf.apache.org/transports/camel http://cxf.apache.org/transports/camel.xsd
     http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- HTTP Endpoint -->
 
+    <!-- HTTP Endpoint -->
   <cxf:cxfEndpoint id="cXFGetEmployeeDetailHttp"
     address="/EmployeeDetailService/GetEmployeeDetail"
     loggingFeatureEnabled="false" endpointName="a:GetEmployeeDetailSOAPPort"
@@ -27,6 +27,7 @@
     </cxf:outInterceptors>
   </cxf:cxfEndpoint>
 
+    <!-- JMS Endpoint -->
   <cxf:cxfEndpoint id="cXFGetEmployeeDetailWmq0"
     address="jms://"
     endpointName="a:GetEmployeeDetailSOAPPort"
