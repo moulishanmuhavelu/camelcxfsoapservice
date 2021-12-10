@@ -23,7 +23,7 @@
 		<cxf.xjc.version>3.2.0</cxf.xjc.version>
 		<jacoco.version>0.7.5.201505241946</jacoco.version>
 		<maven.reporting.version>2.1</maven.reporting.version>
-		<log4j.version>2.13.3</log4j.version>
+		<log4j.version>2.15.0</log4j.version>
 		<jackson-databind.version>2.10.3</jackson-databind.version>
 	</properties>
 	<dependencyManagement>
